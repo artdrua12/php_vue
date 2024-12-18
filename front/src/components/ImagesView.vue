@@ -27,12 +27,13 @@
     >
       <span class="imgTitle">{{ item.image_name }}</span>
       <img :src="item.image_data" class="img" @click="openModal(index)" />
-      <span class="imgSize">{{ Math.ceil(item.image_size / 1000) }} Kb</span>
+      <!-- <span class="imgSize">{{ Math.ceil(item.image_size / 1000) }} Kb</span> -->
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         class="imgDelete"
         @click="removingImg(index)"
+        fill="red"
       >
         <path
           d="M20.37,8.91L19.37,10.64L7.24,3.64L8.24,1.91L11.28,3.66L12.64,3.29L16.97,5.79L17.34,7.16L20.37,8.91M6,19V7H11.07L18,11V19A2,2 0 0,1 16,21H8A2,2 0 0,1 6,19Z"
@@ -63,7 +64,7 @@
           </button>
 
           <button class="modalButtonImg" @click="rotate(90)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
               <path
                 d="M3 13.5C3 9.36 6.36 6 10.5 6H13V2L20 8L13 14V10H10.5C8.57 10 7 11.57 7 13.5V21H3V13.5Z"
               />
@@ -217,7 +218,7 @@ function removingImg(index) {
   display: flex;
   align-content: center;
   flex-wrap: wrap;
-  gap: 20px 25px;
+  gap: 45px 35px;
   margin: 20px 0px 0px 20px;
   /* background-color: rgba(246, 194, 160, 0.122); */
 }
@@ -258,6 +259,8 @@ function removingImg(index) {
   position: relative;
   bottom: 0px;
   left: 0px;
+  width: 34px;
+  color: red;
 }
 /* .modalImg {
     border: 4px solid white;

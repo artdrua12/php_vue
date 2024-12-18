@@ -2,9 +2,9 @@
   <base-modal
     v-model="isOpen"
     title="Создание нового альбома"
-    ok-title="Создать"
+    ok-title="Редактировать"
     cancel-title="отмена"
-    :ok-function="albumStore.createAlbum"
+    :ok-function="albumStore.updateAlbum"
   >
     <form class="form">
       <label for="name" class="form"
