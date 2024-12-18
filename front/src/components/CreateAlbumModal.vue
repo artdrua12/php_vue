@@ -1,27 +1,30 @@
 <template>
   <base-modal
     v-model="isOpen"
-    title="Выход"
+    title="Создание нового альбома"
     ok-title="Создать"
     cancel-title="отмена"
     :ok-function="albumStore.createAlbum"
   >
-    <form>
-      <label for="name">Album Name:</label>
-      <input
-        type="text"
-        id="name"
-        name="album_name"
-        required
-        v-model="albumStore.album.album_name"
-      />
+    <form class="form">
+      <label for="name" class="form"
+        >Имя альбома
+        <input
+          type="text"
+          name="album_name"
+          required
+          v-model="albumStore.album.album_name"
+        />
+      </label>
 
-      <label for="coment">Album Comment:</label>
-      <textarea
-        id="coment"
-        name="album_coment"
-        v-model="albumStore.album.album_coment"
-      ></textarea>
+      <label for="coment" class="form"
+        >Описание
+        <textarea
+          name="album_description"
+          rows="5"
+          v-model="albumStore.album.album_description"
+        ></textarea>
+      </label>
     </form>
   </base-modal>
 </template>
@@ -35,4 +38,13 @@ const albumStore = useAlbumStore();
 </script>
 
 <style>
+.form {
+  display: flex;
+  justify-items: end;
+  flex-direction: column;
+}
+form.form {
+  gap: 20px;
+  margin: 20px 50px;
+}
 </style>

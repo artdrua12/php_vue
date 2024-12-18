@@ -1,26 +1,24 @@
 <template>
   <div class="baseFile pa-3">
-    <div
+    <label
       class="dropbox"
       @dragenter="stopPrevent"
       @dragover="stopPrevent"
       @drop="drop"
     >
-      <label>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <path
-            d="M20,4H16.83L15,2H9L7.17,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6A2,2 0 0,0 20,4M20,18H4V6H8.05L9.88,4H14.12L15.95,6H20V18M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15Z"
-          />
-        </svg>
-        <span class="dropboxIntro mt-2"> переместить или загрузить </span>
-        <input
-          type="file"
-          multiple
-          style="display: none"
-          @change="(e) => uploadFile(e?.target?.files)"
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path
+          d="M20,4H16.83L15,2H9L7.17,4H4A2,2 0 0,0 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6A2,2 0 0,0 20,4M20,18H4V6H8.05L9.88,4H14.12L15.95,6H20V18M12,7A5,5 0 0,0 7,12A5,5 0 0,0 12,17A5,5 0 0,0 17,12A5,5 0 0,0 12,7M12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15Z"
         />
-      </label>
-    </div>
+      </svg>
+      <span class="dropboxIntro mt-2"> переместить или загрузить </span>
+      <input
+        type="file"
+        multiple
+        style="display: none"
+        @change="(e) => uploadFile(e?.target?.files)"
+      />
+    </label>
 
     <div
       v-for="(item, index) in images"
@@ -30,7 +28,6 @@
       <span class="imgTitle">{{ item.image_name }}</span>
       <img :src="item.image_data" class="img" @click="openModal(index)" />
       <span class="imgSize">{{ Math.ceil(item.image_size / 1000) }} Kb</span>
-      <!-- <img :src="URL.createObjectURL(item.value)" class="img" @click="openModal(index)" /> -->
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -218,7 +215,7 @@ function removingImg(index) {
   <style scoped>
 .baseFile {
   display: flex;
-  align-content: flex-start;
+  align-content: center;
   flex-wrap: wrap;
   gap: 20px 25px;
   margin: 20px 0px 0px 20px;
@@ -227,19 +224,16 @@ function removingImg(index) {
 .dropbox {
   width: 170px;
   height: 120px;
-  display: grid;
+  display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   border: 3px dashed #2c4957;
   padding: 5px;
   border-radius: 10px;
-  margin-bottom: 25px;
+  /* margin-bottom: 25px; */
+  justify-content: center;
 }
 .dropboxIntro {
-  display: block;
-  margin: auto;
-  text-align: center;
   font-size: 14px;
   line-height: 1;
   font-family: serif;
@@ -247,7 +241,7 @@ function removingImg(index) {
 }
 .img {
   max-width: 100%;
-  height: 120px;
+  height: 135px;
   object-fit: contain;
   border-radius: 10px;
 }

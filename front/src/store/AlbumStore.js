@@ -4,7 +4,7 @@ import { ref } from 'vue'
 export const useAlbumStore = defineStore('album', () => {
 
   // state
-  const album = ref({ album_name: '', album_coment: '' })
+  const album = ref({ album_name: '', album_description: '' })
   const allAlbums = ref()
 
   // action
@@ -47,7 +47,6 @@ export const useAlbumStore = defineStore('album', () => {
           "Cache-Control": "no-cache",
           "API-Key": "secret",
         },
-        credentials: "omit",
         body: JSON.stringify(album.value),
       });
       console.log(response);
@@ -64,7 +63,6 @@ export const useAlbumStore = defineStore('album', () => {
     try {
       const response = await fetch("http://localhost/app/api.php", {
         method: "DELETE",
-        credentials: "omit",
         body: JSON.stringify(album.value),
       });
       console.log(response);

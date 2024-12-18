@@ -16,11 +16,11 @@
         v-model="albumStore.album.album_name"
       />
 
-      <label for="coment">Album Comment:</label>
+      <label for="coment">Album Description:</label>
       <textarea
         id="coment"
-        name="album_coment"
-        v-model="albumStore.album.album_coment"
+        name="album_description"
+        v-model="albumStore.album.album_description"
       ></textarea>
     </form>
   </base-modal>

@@ -17,7 +17,7 @@
         <tr>
           <th>ID</th>
           <th>Album Name</th>
-          <th>Album Comment</th>
+          <th>Album Description</th>
           <th>See</th>
           <th>Edit</th>
           <th>Delete</th>
@@ -27,7 +27,7 @@
         <tr v-for="item in albumStore.allAlbums" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.album_name }}</td>
-          <td>{{ item.album_coment }}</td>
+          <td>{{ item.album_description }}</td>
           <td>
             <button
               type="button"
@@ -103,7 +103,7 @@ function viewAlbum(item) {
 }
 
 function createAlbum() {
-  albumStore.album = { album_name: "", album_coment: "" };
+  albumStore.album = { album_name: "", album_description: "" };
   isCreateAlbum.value = !isCreateAlbum.value;
 }
 

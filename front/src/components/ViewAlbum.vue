@@ -2,7 +2,7 @@
   <div class="albumFull" @click="viewAlbum">
     <images-view class="full"></images-view>
     <h1>{{ albumStore.album.album_name }}</h1>
-    <h1>{{ albumStore.album.album_coment }}</h1>
+    <h1>{{ albumStore.album.album_description }}</h1>
   </div>
 </template>
 
