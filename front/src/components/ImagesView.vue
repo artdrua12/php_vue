@@ -76,14 +76,15 @@
       </div>
     </base-modal>
     <button @click="test">test</button>
-    <div id="test">test</div>
   </div>
 </template>
   
   <script setup>
 import { ref, nextTick } from "vue";
+import { useRoute } from "vue-router";
 import { useAlbumStore } from "@/store/AlbumStore";
 const albumStore = useAlbumStore();
+const route = useRoute();
 import BaseModal from "@/components/BaseModal.vue";
 const modalCanvas = ref(null); // canvas который находится в модальном окне
 const isOpen = ref(false);
@@ -93,32 +94,12 @@ const scale = ref(1);
 const images = ref([]);
 
 async function test() {
-  // const response = await fetch("http://localhost/app/imagesApiTEST.php", {
-  //   method: "GET",
-  // });
-
-  // if (response.ok) {
-  //   const answer = await response.json();
-  //   // const answer = await response;
-  //   console.log("answer", answer.data);
-  //   // const imageObjectURL = URL.createObjectURL(answer);
-  //   for (let i = 0; i < answer.data.length; i++) {
-  //     images.value.push({
-  //       image_name: answer.data[i][1],
-  //       image_size: answer.data[i][2],
-  //       image_type: answer.data[i][3],
-  //       image_data: "data:image/jpeg;base64," + answer.data[i][0],
-  //     });
-  //   }
-  // } else {
-  //   console.log("no answer correctly");
-  // }
   const answer = await albumStore.getImages();
   for (let i = 0; i < answer.data.length; i++) {
     images.value.push({
       image_name: answer.data[i][1],
       image_size: answer.data[i][2],
-      image_type: answer.data[i][3],
+      album_id: route.params.id,
       image_data: "data:image/jpeg;base64," + answer.data[i][0],
     });
   }
@@ -185,19 +166,14 @@ function uploadFile(files) {
       const reader = new FileReader();
       reader.readAsDataURL(files[i]);
       reader.onloadend = () => {
-        images.value.push({
+        const newObject = {
           image_name: files[i].name,
           image_size: files[i].size,
-          image_type: files[i].type,
+          album_id: route.params.id,
           image_data: reader.result,
-        });
-
-        albumStore.saveImage({
-          image_name: files[i].name,
-          image_size: files[i].size,
-          image_type: files[i].type,
-          image_data: reader.result,
-        });
+        };
+        images.value.push(newObject);
+        albumStore.saveImage(newObject);
       };
     }
   }
@@ -319,5 +295,6 @@ function removingImg(index) {
 .canvasC {
   border: 2px solid white;
   margin: auto;
+  max-height: 70vh;
 }
 </style>

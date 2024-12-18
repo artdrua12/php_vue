@@ -1,15 +1,15 @@
 <template>
   <div class="albumFull" @click="viewAlbum">
-    <img src="../assets/logo.png" class="img" />
+    <images-view class="full"></images-view>
     <h1>{{ albumStore.album.album_name }}</h1>
     <h1>{{ albumStore.album.album_coment }}</h1>
   </div>
 </template>
 
 <script setup>
-import {useAlbumStore } from "@/store/AlbumStore"
-const albumStore = useAlbumStore()
-
+import ImagesView from "@/components/ImagesView.vue";
+import { useAlbumStore } from "@/store/AlbumStore";
+const albumStore = useAlbumStore();
 </script>
 
 <style scoped>

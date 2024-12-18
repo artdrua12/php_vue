@@ -13,7 +13,7 @@ if ($requestMethod === "GET") {
     $query = $conn->query("SELECT * FROM images ORDER BY id DESC");
     while ($row = $query->fetch_assoc()) {
         $image_data = base64_encode($row['image_data']);
-        array_push($data, [$image_data, $row['image_name'], $row['image_size'], $row['image_type']]);
+        array_push($data, [$image_data, $row['image_name'], $row['image_size'], $row['album_id']]);
     }
 
     if ($query) {
@@ -34,13 +34,13 @@ if ($requestMethod === "GET") {
 if ($requestMethod === "POST") {
     $data = json_decode(file_get_contents("php://input"), true);
     $image_name = $data["image_name"];
-    $image_type = $data["image_type"];
+    $album_id = $data["album_id"];
     $image_size = $data["image_size"];
     $image_data = addslashes(file_get_contents($data['image_data']));
     // $img = addslashes(file_get_contents($_FILES['img_upload']['tmp_name']));
 
 
-    $sql = "INSERT INTO images (image_name,image_type,image_size, image_data) VALUES ('$image_name','$image_type',' $image_size', '$image_data')";
+    $sql = "INSERT INTO images (image_name,album_id,image_size, image_data) VALUES ('$image_name','$album_id',' $image_size', '$image_data')";
     $result = $conn->query($sql);
     if ($result) {
         $response = [

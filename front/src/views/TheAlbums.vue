@@ -79,13 +79,11 @@
     <CreateAlbumModal v-model="isCreateAlbum" />
     <UpdateAlbumModal v-model="isUpdateAlbum" />
     <DeleteAlbumModal v-model="isDeleteAlbum" />
-    <images-view class="full"></images-view>
   </div>
 </template>
   
   <script setup>
 import { ref } from "vue";
-import ImagesView from "@/components/ImagesView.vue";
 import CreateAlbumModal from "@/components/CreateAlbumModal.vue";
 import UpdateAlbumModal from "@/components/UpdateAlbumModal.vue";
 import DeleteAlbumModal from "@/components/DeleteAlbumModal.vue";
