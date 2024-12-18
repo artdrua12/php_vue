@@ -23,4 +23,9 @@ nav a {
 nav a.router-link-exact-active {
   color: #42b983;
 }
+
+button{
+  border: none;
+  padding: 7px 15px;
+}
 </style>

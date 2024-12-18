@@ -120,7 +120,7 @@ function removeAlbum(item) {
 albumStore.getAllAlbums();
 </script>
   
-  <style>
+  <style scoped>
 .wrapper {
   width: 90vw;
   margin: auto;

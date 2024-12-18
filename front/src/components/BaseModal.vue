@@ -12,6 +12,7 @@
             @click="close"
             width="20px"
             height="20px"
+            fill="white"
           >
             <path
               d="M13.46,12L19,17.54V19H17.54L12,13.46L6.46,19H5V17.54L10.54,12L5,6.46V5H6.46L12,10.54L17.54,5H19V6.46L13.46,12Z"
@@ -22,8 +23,17 @@
           <slot></slot>
         </div>
         <div class="modal-button">
-          <button type="button" class="btn btn-secondary" @click="close">{{ props.cancelTitle }}</button>
-          <button type="button" class="btn btn-success" :disabled="okDisable" @click="ok">{{ props.okTitle }}</button>
+          <button type="button" class="secondary" @click="close">
+            {{ props.cancelTitle }}
+          </button>
+          <button
+            type="button"
+            class="success"
+            :disabled="okDisable"
+            @click="ok"
+          >
+            {{ props.okTitle }}
+          </button>
         </div>
       </div>
     </div>
@@ -88,7 +98,6 @@ function ok() {
   height: 100vh;
   z-index: 5;
   background-color: rgba(33, 33, 33, 0.33);
-
   backdrop-filter: grayscale(1) blur(1px);
 }
 
@@ -110,7 +119,7 @@ function ok() {
   align-items: center;
   color: white;
   font-size: 18px;
-  padding: 0px 0px 0px 12px;
+  padding: 0px 15px 0px 15px;
   border-radius: 4px 4px 0 0;
 }
 .modal-content {
@@ -118,7 +127,7 @@ function ok() {
   max-height: 90vh;
   overflow: auto;
   scrollbar-width: thin;
-  padding: 20px;
+  padding: 20px 20px 10px 20px;
 }
 
 .modal-button {
@@ -129,5 +138,13 @@ function ok() {
 }
 .modal p {
   font-size: 20px;
+}
+.secondary {
+  background-color: #546e7a;
+  color: white;
+}
+.success {
+  background-color: #3bd015;
+  color: white;
 }
 </style>
