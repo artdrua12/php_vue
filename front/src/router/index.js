@@ -11,7 +11,7 @@ const routes = [
     path: '/album/:id',
     name: 'album',
     params: true,
-    component: () => import("../components/ViewAlbum.vue")
+    component: () => import("../components/AlbumItem.vue")
   },
 ]
 

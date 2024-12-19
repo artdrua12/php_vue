@@ -16,7 +16,7 @@ if ($requestMethod === "GET") {
         array_push($data, $row);
     }
     $response = [
-        "message" => "Albums read Successfully",
+        "message" => "Альбомы успешно получены",
         "data" => $data,
         "status" => 200,
     ];
@@ -31,7 +31,7 @@ if ($requestMethod === "POST") {
 
     if (empty($album_name) || empty($album_description)) {
         $response = [
-            "message" => "Please fill out all the required fields",
+            "message" => "Заполните все поля",
             "status" => 400,
         ];
         header("Location: http://localhost:8081/");
@@ -39,22 +39,16 @@ if ($requestMethod === "POST") {
     } else {
         $sql = "INSERT INTO albums (album_name, album_description) VALUES ('$album_name', '$album_description')";
         $result = $conn->query($sql);
-        if ($result) {
-            $response = [
-                "message" => "Data received!",
-                "data" => $result,
-                "status" => 200,
-            ];
+        $response = [
+            "message" => "Альбом успешно создан",
+            "data" => $result,
+            "status" => 200,
+        ];
 
-            header("Location: http://localhost:8081/");
-            exit();
+        header("Location: http://localhost:8081/");
+        exit();
 
-        } else {
-            $response = [
-                "message" => "Could not add album",
-                "status" => 400,
-            ];
-        }
+
     }
 }
 
@@ -66,29 +60,21 @@ if ($requestMethod === "PUT") {
 
     if (empty($album_name) || empty($album_description)) {
         $response = [
-            "message" => "Please fill out all the required fields",
+            "message" => "Заполните все поля",
             "status" => 400,
         ];
         exit();
     } else {
         $sql = "update albums set album_name='$album_name', album_description='$album_description' where id='$album_id'";
         $result = $conn->query($sql);
-        if ($result) {
-            $response = [
-                "message" => "Album updated successfully",
-                "data" => 'Album updated successfully',
-                "status" => 200,
-            ];
+        $response = [
+            "message" => "Альбом успешно обновлен",
+            "data" => 'Album updated successfully',
+            "status" => 200,
+        ];
 
-            header("Location: http://localhost:8081/");
-            exit();
-
-        } else {
-            $response = [
-                "message" => "Could not add album",
-                "status" => 400,
-            ];
-        }
+        header("Location: http://localhost:8081/");
+        exit();
     }
 }
 
@@ -100,14 +86,14 @@ if ($requestMethod === "DELETE") {
     $result = $conn->query($sql);
     if ($result) {
         $response = [
-            "message" => "Album deleted successfully",
+            "message" => "Альбом удален",
             "data" => 'Album deleted successfully',
             "status" => 200,
         ];
 
     } else {
         $response = [
-            "message" => "Could not add album",
+            "message" => "Не удалось удалить альбом",
             "status" => 400,
         ];
     }

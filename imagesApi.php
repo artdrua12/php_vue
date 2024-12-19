@@ -18,13 +18,13 @@ if ($requestMethod === "GET") {
 
     if ($query) {
         $response = [
-            "message" => "Images read successfully",
+            "message" => "Картинка успешно получена",
             "data" => $data,
             "status" => 200,
         ];
     } else {
         $response = [
-            "message" => "Could not read images",
+            "message" => "Не удалось получить картинку",
             "status" => 400,
             "data" => 'no data',
         ];
@@ -44,55 +44,18 @@ if ($requestMethod === "POST") {
     $result = $conn->query($sql);
     if ($result) {
         $response = [
-            "message" => "Images received!",
+            "message" => "Картинка добавлена",
             "data" => $result,
             "status" => 200,
         ];
     } else {
         $response = [
-            "message" => "Could not add album",
+            "message" => "Не удалось добавить картинку",
             "status" => 400,
         ];
     }
 }
 
-if ($requestMethod === "PUT") {
-    $data = json_decode(file_get_contents("php://input"), true);
-    print_r(json_encode($data));
-    $album_name = $data["album_name"];
-    $album_description = $data["album_description"];
-    $album_id = $data["id"];
-
-
-
-
-    if (empty($album_name) || empty($album_description)) {
-        $response = [
-            "message" => "Please fill out all the required fields",
-            "status" => 400,
-        ];
-        exit();
-    } else {
-        $sql = "update albums set album_name='$album_name', album_description='$album_description' where id='$album_id'";
-        $result = $conn->query($sql);
-        if ($result) {
-            $response = [
-                "message" => "Album updated successfully",
-                "data" => $result,
-                "status" => 200,
-            ];
-
-            header("Location: http://localhost:8081/");
-            exit();
-
-        } else {
-            $response = [
-                "message" => "Could not add album",
-                "status" => 400,
-            ];
-        }
-    }
-}
 
 if ($requestMethod === "DELETE") {
     $data = json_decode(file_get_contents("php://input"), true);
@@ -102,14 +65,14 @@ if ($requestMethod === "DELETE") {
     $result = $conn->query($sql);
     if ($result) {
         $response = [
-            "message" => "Album deleted successfully",
+            "message" => "Картинка удалена",
             "data" => $result,
             "status" => 200,
         ];
 
     } else {
         $response = [
-            "message" => "Could not add album",
+            "message" => "Не удалось удалить картинку",
             "status" => 400,
         ];
     }

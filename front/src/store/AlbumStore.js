@@ -1,8 +1,9 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
+import { useSnackStore } from './snackStore'
 
 export const useAlbumStore = defineStore('album', () => {
-
+  const snack = useSnackStore()
   // state
   const album = ref({ album_name: '', album_description: '' })
   const allAlbums = ref()
@@ -23,17 +24,14 @@ export const useAlbumStore = defineStore('album', () => {
         body: JSON.stringify(album.value),
       });
 
-      console.log("response: ", response);
 
       if (response.ok) {
         const answer = await response.json();
-        const data = answer.data;
-        console.log(data);
-
+        snack.setSnack({ text: answer.data, type: 'info' })
       }
       await getAllAlbums();
     } catch (error) {
-      console.log("error", error);
+      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
       await getAllAlbums();
     }
   }
@@ -49,13 +47,14 @@ export const useAlbumStore = defineStore('album', () => {
         },
         body: JSON.stringify(album.value),
       });
-      console.log(response);
 
       if (response.ok) {
+        const answer = await response.json();
+        snack.setSnack({ text: answer.message, type: 'info' })
         await getAllAlbums();
       }
     } catch (error) {
-      console.log("errror", error);
+      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
     }
   }
 
@@ -68,11 +67,12 @@ export const useAlbumStore = defineStore('album', () => {
       console.log(response);
 
       if (response.ok) {
-        console.log('Данные удалены');
+        const answer = await response.json();
+        snack.setSnack({ text: answer.message, type: 'info' })
         await getAllAlbums();
       }
     } catch (error) {
-      console.log("errror", error);
+      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
     }
   }
 
@@ -85,10 +85,10 @@ export const useAlbumStore = defineStore('album', () => {
       if (response.ok) {
         const answer = await response.json();
         allAlbums.value = answer.data;
+        snack.setSnack({ text: answer.message, type: 'info' })
       }
     } catch (error) {
-      console.log(error);
-
+      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
     }
   }
 
@@ -100,18 +100,15 @@ export const useAlbumStore = defineStore('album', () => {
 
       if (response.ok) {
         const answer = await response.json();
-        console.log('answer', answer);
+        snack.setSnack({ text: answer.message, type: 'info' })
         return answer;
       }
     } catch (error) {
-      console.log(error);
-
+      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
     }
   }
 
   async function saveImage(image) {
-    console.log('paramimage', image);
-
     try {
       const response = await fetch("http://localhost/app/imagesApi.php", {
         method: "POST",
@@ -123,20 +120,18 @@ export const useAlbumStore = defineStore('album', () => {
         },
         credentials: "omit",
         body: JSON.stringify(image),
-        // body: image,
       });
 
-      console.log("response: ", response);
 
       if (response.ok) {
         const answer = await response.json();
-        const data = answer.data;
-        console.log(data);
+        snack.setSnack({ text: answer.message, type: 'info' })
       }
       await getAllAlbums();
     } catch (error) {
       console.log("error", error);
       await getAllAlbums();
+      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
     }
   }
 

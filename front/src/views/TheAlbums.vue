@@ -4,11 +4,10 @@
       Albums
       <button
         type="button"
-        style="background-color: green; color: white"
-        class="btn btn-outline-success"
+        style="background-color: rgb(0, 120, 120); color: white"
         @click="createAlbum"
       >
-        Add new Album
+        Создать новый альбом
       </button>
     </h2>
 
@@ -31,7 +30,7 @@
           <td>
             <button
               type="button"
-              style="background-color: lightblue"
+              style="background-color: rgb(0, 255, 255)"
               @click="viewAlbum(item)"
             >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
