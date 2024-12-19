@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <form action="index.php" method="post" enctype="multipart/form-data">
+    <!-- <form action="index.php" method="post" enctype="multipart/form-data">
         <p>Загрузить картику</p>
         <input type="file" name="img_upload"><input type="submit" name="upload" value="Загрузить">
         <?php
@@ -26,22 +26,9 @@
         }
         ?>
 
-    </form>
+    </form> -->
 
-    <?php
-    $query = $conn->query("SELECT * FROM images ORDER BY id DESC");
-    while ($row = $query->fetch_assoc()) {
-        $id = $row['id'];
-        $image_name = $row['image_name'];
-        $image_data = base64_encode($row['image_data']);
-        $image_size = $row['image_size'];
-        $image_type = $row['image_type'];
-        echo "<b>" . $image_name . "</b> (" . $image_size . "kB.)"; ?> <br />
-        <img src="data:image/jpeg;base64, <?= $image_data ?>" alt="" width="100"><br />
-        <br />
-    <?php }
 
-    ?>
     <?php
     $sql = "SELECT * FROM images ";
     $result = $conn->query($sql);

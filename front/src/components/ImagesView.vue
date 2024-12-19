@@ -64,7 +64,7 @@
           </button>
 
           <button class="modalButtonImg" @click="rotate(90)">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
               <path
                 d="M3 13.5C3 9.36 6.36 6 10.5 6H13V2L20 8L13 14V10H10.5C8.57 10 7 11.57 7 13.5V21H3V13.5Z"
               />
@@ -73,7 +73,7 @@
         </div>
       </div>
     </base-modal>
-    <button @click="test">test</button>
+    <button @click="loadImages">загрузить</button>
   </div>
 </template>
   
@@ -90,8 +90,9 @@ const currentIndex = ref();
 const scale = ref(1);
 
 const images = ref([]);
+loadImages();
 
-async function test() {
+async function loadImages() {
   const answer = await albumStore.getImages();
   for (let i = 0; i < answer.data.length; i++) {
     images.value.push({

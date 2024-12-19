@@ -1,39 +1,41 @@
 <template>
-  <router-view />
-  <transition-group name="slide" tag="div" class="snackbar-wrapper">
-    <div
-      v-for="item in snack"
-      :key="item.id"
-      class="snackbar"
-      :class="item.type"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        v-if="item.type == 'info'"
-        width="35"
-        fill="white"
+  <div>
+    <router-view />
+    <transition-group name="slide" tag="div" class="snackbar-wrapper">
+      <div
+        v-for="item in snack"
+        :key="item.id"
+        class="snackbar"
+        :class="item.type"
       >
-        <path
-          d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
-        />
-      </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          v-if="item.type == 'info'"
+          width="35"
+          fill="white"
+        >
+          <path
+            d="M13,9H11V7H13M13,17H11V11H13M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z"
+          />
+        </svg>
 
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 24 24"
-        v-if="item.type == 'error'"
-        width="35"
-        fill="white"
-      >
-        <path
-          d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"
-        />
-      </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          v-if="item.type == 'error'"
+          width="35"
+          fill="white"
+        >
+          <path
+            d="M20 6.91L17.09 4L12 9.09L6.91 4L4 6.91L9.09 12L4 17.09L6.91 20L12 14.91L17.09 20L20 17.09L14.91 12L20 6.91Z"
+          />
+        </svg>
 
-      <span>{{ item.text }}</span>
-    </div>
-  </transition-group>
+        <span>{{ item.text }}</span>
+      </div>
+    </transition-group>
+  </div>
 </template>
 
 
@@ -53,19 +55,9 @@ const { snack } = storeToRefs(store); // для работы с уведомле
   color: #2c3e50;
 }
 
-nav {
-  padding: 30px;
+.full {
+  grid-column: 1/-1;
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
-}
-
 button {
   border: none;
   padding: 7px 15px;
