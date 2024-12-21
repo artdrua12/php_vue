@@ -26,6 +26,7 @@
           <button type="button" class="secondary" @click="close">
             {{ props.cancelTitle }}
           </button>
+          <slot name="button"></slot>
           <button
             type="button"
             class="success"

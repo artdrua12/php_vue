@@ -34,8 +34,6 @@ if ($requestMethod === "POST") {
             "message" => "Заполните все поля",
             "status" => 400,
         ];
-        header("Location: http://localhost:8081/");
-        exit();
     } else {
         $sql = "INSERT INTO albums (album_name, album_description) VALUES ('$album_name', '$album_description')";
         $result = $conn->query($sql);
@@ -44,11 +42,6 @@ if ($requestMethod === "POST") {
             "data" => $result,
             "status" => 200,
         ];
-
-        header("Location: http://localhost:8081/");
-        exit();
-
-
     }
 }
 
@@ -63,7 +56,6 @@ if ($requestMethod === "PUT") {
             "message" => "Заполните все поля",
             "status" => 400,
         ];
-        exit();
     } else {
         $sql = "update albums set album_name='$album_name', album_description='$album_description' where id='$album_id'";
         $result = $conn->query($sql);
@@ -74,7 +66,6 @@ if ($requestMethod === "PUT") {
         ];
 
         header("Location: http://localhost:8081/");
-        exit();
     }
 }
 
@@ -98,7 +89,6 @@ if ($requestMethod === "DELETE") {
         ];
     }
 
-    exit();
 }
 
 
@@ -108,6 +98,7 @@ header("Content-Type: application/json");
 // if (!headers_sent()) {
 //     header('Access-Control-Allow-Origin: http://localhost:8081');
 // }
+header('Access-Control-Allow-Origin: null');
 
 
 echo json_encode($response);

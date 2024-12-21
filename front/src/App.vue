@@ -40,7 +40,7 @@
 
 
 <script setup>
-import { useSnackStore } from "@/store/snackStore";
+import { useSnackStore } from "@/store/SnackStore";
 import { storeToRefs } from "pinia"; // что бы объект был реактивным
 const store = useSnackStore(); // для работы с уведовлениями
 const { snack } = storeToRefs(store); // для работы с уведомлениями что бы они были реактивны

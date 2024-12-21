@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
-import { useSnackStore } from './snackStore'
+import { useSnackStore } from './SnackStore'
 
 export const useAlbumStore = defineStore('album', () => {
   const snack = useSnackStore()
@@ -9,6 +9,21 @@ export const useAlbumStore = defineStore('album', () => {
   const allAlbums = ref()
 
   // action
+  async function getAllAlbums() {
+    try {
+      const response = await fetch("http://localhost/app/api.php", {
+        method: "GET",
+      });
+
+      if (response.ok) {
+        const answer = await response.json();
+        allAlbums.value = answer.data;
+        // snack.setSnack({ text: answer.message, type: 'info' })
+      }
+    } catch (error) {
+      snack.setSnack({ text: 'Ошибка чтения альбома ', type: 'error' })
+    }
+  }
 
   async function createAlbum() {
     try {
@@ -54,7 +69,7 @@ export const useAlbumStore = defineStore('album', () => {
         await getAllAlbums();
       }
     } catch (error) {
-      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
+      snack.setSnack({ text: 'Ошибка обновления альбома ', type: 'error' })
     }
   }
 
@@ -64,7 +79,6 @@ export const useAlbumStore = defineStore('album', () => {
         method: "DELETE",
         body: JSON.stringify(album.value),
       });
-      console.log(response);
 
       if (response.ok) {
         const answer = await response.json();
@@ -72,29 +86,17 @@ export const useAlbumStore = defineStore('album', () => {
         await getAllAlbums();
       }
     } catch (error) {
-      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
+      snack.setSnack({ text: 'Ошибка удаления альбома ', type: 'error' })
     }
   }
 
-  async function getAllAlbums() {
-    try {
-      const response = await fetch("http://localhost/app/api.php", {
-        method: "GET",
-      });
 
-      if (response.ok) {
-        const answer = await response.json();
-        allAlbums.value = answer.data;
-        snack.setSnack({ text: answer.message, type: 'info' })
-      }
-    } catch (error) {
-      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
-    }
-  }
 
-  async function getImages() {
+  async function getImages(id) {
+    console.log('id', id);
+
     try {
-      const response = await fetch("http://localhost/app/imagesApi.php", {
+      const response = await fetch(`http://localhost/app/imagesApi.php?id=${id}`, {
         method: "GET",
       });
 
@@ -104,7 +106,7 @@ export const useAlbumStore = defineStore('album', () => {
         return answer;
       }
     } catch (error) {
-      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
+      snack.setSnack({ text: 'Ошибка получения картинок ', type: 'error' })
     }
   }
 
@@ -127,14 +129,31 @@ export const useAlbumStore = defineStore('album', () => {
         const answer = await response.json();
         snack.setSnack({ text: answer.message, type: 'info' })
       }
-      await getAllAlbums();
+
+
     } catch (error) {
       console.log("error", error);
-      await getAllAlbums();
-      snack.setSnack({ text: 'Ошибка сети ', type: 'error' })
+      snack.setSnack({ text: 'Ошибка сохранения картинки ', type: 'error' })
+    }
+  }
+
+  async function deleteImage(image) {
+
+    try {
+      const response = await fetch("http://localhost/app/imagesApi.php", {
+        method: "DELETE",
+        body: JSON.stringify(image),
+      });
+
+      if (response.ok) {
+        const answer = await response.json();
+        await snack.setSnack({ text: answer.message, type: 'info' })
+      }
+    } catch (error) {
+      snack.setSnack({ text: 'Ошибка удаления картинки ', type: 'error' })
     }
   }
 
 
-  return { album, allAlbums, createAlbum, updateAlbum, removeAlbum, getAllAlbums, getImages, saveImage }
+  return { album, allAlbums, createAlbum, updateAlbum, removeAlbum, getAllAlbums, getImages, saveImage, deleteImage }
 })
